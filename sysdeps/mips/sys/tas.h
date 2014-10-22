@@ -44,8 +44,8 @@ __NTH (_test_and_set (int *__p, int __v))
 #if _MIPS_SIM == _ABIO32 && __mips < 2
      ".set	mips2\n\t"
 #endif
-     "sync\n\t"
      "1:\n\t"
+     "sync\n\t"
      "ll	%0,%3\n\t"
      "move	%1,%4\n\t"
      "beq	%0,%4,2f\n\t"
