@@ -258,8 +258,8 @@ typedef uintmax_t uatomic_max_t;
      __asm__ __volatile__ (						      \
      ".set	push\n\t"						      \
      MIPS_PUSH_MIPS2							      \
-     rel	"\n"							      \
      "1:\t"								      \
+     rel	"\n"							      \
      "ll	%0,%5\n\t"						      \
      "move	%1,$0\n\t"						      \
      "bne	%0,%3,2f\n\t"						      \
@@ -282,8 +282,8 @@ typedef uintmax_t uatomic_max_t;
      __asm__ __volatile__ ("\n"						      \
      ".set	push\n\t"						      \
      MIPS_PUSH_MIPS2							      \
-     rel	"\n"							      \
      "1:\t"								      \
+     rel	"\n"							      \
      "lld	%0,%5\n\t"						      \
      "move	%1,$0\n\t"						      \
      "bne	%0,%3,2f\n\t"						      \
@@ -378,8 +378,8 @@ typedef uintmax_t uatomic_max_t;
      __asm__ __volatile__ ("\n"						      \
      ".set	push\n\t"						      \
      MIPS_PUSH_MIPS2							      \
-     rel	"\n"							      \
      "1:\t"								      \
+     rel	"\n"							      \
      "ll	%0,%4\n\t"						      \
      "move	%1,%3\n\t"						      \
      "sc	%1,%2\n\t"						      \
@@ -402,8 +402,8 @@ typedef uintmax_t uatomic_max_t;
      __asm__ __volatile__ ("\n"						      \
      ".set	push\n\t"						      \
      MIPS_PUSH_MIPS2							      \
-     rel	"\n"							      \
      "1:\n"								      \
+     rel	"\n"							      \
      "lld	%0,%4\n\t"						      \
      "move	%1,%3\n\t"						      \
      "scd	%1,%2\n\t"						      \
@@ -437,8 +437,8 @@ typedef uintmax_t uatomic_max_t;
      __asm__ __volatile__ ("\n"						      \
      ".set	push\n\t"						      \
      MIPS_PUSH_MIPS2							      \
-     rel	"\n"							      \
      "1:\t"								      \
+     rel	"\n"							      \
      "ll	%0,%4\n\t"						      \
      "addu	%1,%0,%3\n\t"						      \
      "sc	%1,%2\n\t"						      \
@@ -461,8 +461,8 @@ typedef uintmax_t uatomic_max_t;
      __asm__ __volatile__ (						      \
      ".set	push\n\t"						      \
      MIPS_PUSH_MIPS2							      \
-     rel	"\n"							      \
      "1:\t"								      \
+     rel	"\n"							      \
      "lld	%0,%4\n\t"						      \
      "daddu	%1,%0,%3\n\t"						      \
      "scd	%1,%2\n\t"						      \
