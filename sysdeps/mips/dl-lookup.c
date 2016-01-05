@@ -419,7 +419,9 @@ do_lookup_x (const char *undef_name, uint_fast32_t new_hash,
 		  do
 		    if (((*hasharr ^ new_hash) >> 1) == 0)
 		      {
-			symidx = hasharr - map->l_gnu_chain_zero;
+			symidx =
+			  map->l_mach.gnu_xlat_zero[hasharr -
+						    map->l_gnu_chain_zero];
 			sym = check_match (undef_name, ref, version, flags,
 					   type_class, &symtab[symidx], symidx,
 					   strtab, map, &versioned_sym,
@@ -956,12 +958,12 @@ _dl_setup_hash (struct link_map *map)
 {
   Elf_Symndx *hash;
 
-  if (__glibc_likely (map->l_info[DT_ADDRTAGIDX (DT_GNU_HASH) + DT_NUM
+  if (__glibc_likely (map->l_info[DT_ADDRTAGIDX (DT_GNU_XHASH) + DT_NUM
 				    + DT_THISPROCNUM + DT_VERSIONTAGNUM
 				    + DT_EXTRANUM + DT_VALNUM] != NULL))
     {
       Elf32_Word *hash32
-	= (void *) D_PTR (map, l_info[DT_ADDRTAGIDX (DT_GNU_HASH) + DT_NUM
+	= (void *) D_PTR (map, l_info[DT_ADDRTAGIDX (DT_GNU_XHASH) + DT_NUM
 				      + DT_THISPROCNUM + DT_VERSIONTAGNUM
 				      + DT_EXTRANUM + DT_VALNUM]);
       map->l_nbuckets = *hash32++;
@@ -978,6 +980,8 @@ _dl_setup_hash (struct link_map *map)
       map->l_gnu_buckets = hash32;
       hash32 += map->l_nbuckets;
       map->l_gnu_chain_zero = hash32 - symbias;
+      hash32 += map->l_info[DT_MIPS (SYMTABNO)]->d_un.d_val - symbias;
+      map->l_mach.gnu_xlat_zero = hash32 - symbias;
       return;
     }
 

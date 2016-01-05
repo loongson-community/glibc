@@ -447,6 +447,7 @@ typedef struct
 #define SHT_SYMTAB_SHNDX  18		/* Extended section indeces */
 #define	SHT_NUM		  19		/* Number of defined types.  */
 #define SHT_LOOS	  0x60000000	/* Start OS-specific.  */
+#define SHT_GNU_XHASH	  0x6ffffff4	/* GNU-style hash table with xlat.  */
 #define SHT_GNU_ATTRIBUTES 0x6ffffff5	/* Object attributes.  */
 #define SHT_GNU_HASH	  0x6ffffff6	/* GNU-style hash table.  */
 #define SHT_GNU_LIBLIST	  0x6ffffff7	/* Prelink library list */
@@ -876,6 +877,7 @@ typedef struct
    If any adjustment is made to the ELF object after it has been
    built these entries will need to be adjusted.  */
 #define DT_ADDRRNGLO	0x6ffffe00
+#define DT_GNU_XHASH	0x6ffffef4	/* GNU-style hash table with xlat.  */
 #define DT_GNU_HASH	0x6ffffef5	/* GNU-style hash table.  */
 #define DT_TLSDESC_PLT	0x6ffffef6
 #define DT_TLSDESC_GOT	0x6ffffef7
@@ -889,7 +891,7 @@ typedef struct
 #define DT_SYMINFO	0x6ffffeff	/* Syminfo table.  */
 #define DT_ADDRRNGHI	0x6ffffeff
 #define DT_ADDRTAGIDX(tag)	(DT_ADDRRNGHI - (tag))	/* Reverse order! */
-#define DT_ADDRNUM 11
+#define DT_ADDRNUM 12
 
 /* The versioning entry types.  The next are defined as part of the
    GNU extension.  */
