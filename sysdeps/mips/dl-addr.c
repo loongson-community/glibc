@@ -42,34 +42,27 @@ determine_info (const ElfW(Addr) addr, struct link_map *match, Dl_info *info,
   ElfW(Word) strtabsize = match->l_info[DT_STRSZ]->d_un.d_val;
 
   const ElfW(Sym) *matchsym = NULL;
-  if (match->l_info[DT_ADDRTAGIDX (DT_GNU_HASH) + DT_NUM + DT_THISPROCNUM
+  if (match->l_info[DT_ADDRTAGIDX (DT_GNU_XHASH) + DT_NUM + DT_THISPROCNUM
 		    + DT_VERSIONTAGNUM + DT_EXTRANUM + DT_VALNUM] != NULL)
     {
-      /* We look at all symbol table entries referenced by the hash
-	 table.  */
-      for (Elf_Symndx bucket = 0; bucket < match->l_nbuckets; ++bucket)
+      const Elf32_Word * const xhash32
+	= (void *) D_PTR (match, l_info[DT_ADDRTAGIDX (DT_GNU_XHASH) + DT_NUM
+					+ DT_THISPROCNUM + DT_VERSIONTAGNUM
+					+ DT_EXTRANUM + DT_VALNUM]);
+      const Elf32_Word symbias = xhash32[1];
+      const Elf32_Word dynsymcount = match->l_info[DT_MIPS_SYMTABNO
+					- DT_LOPROC + DT_NUM]->d_un.d_val;
+      for (Elf32_Word symndx = symbias; symndx < dynsymcount; ++symndx)
 	{
-	  Elf32_Word symndx = match->l_gnu_buckets[bucket];
-	  if (symndx != 0)
-	    {
-	      const Elf32_Word *hasharr = &match->l_gnu_chain_zero[symndx];
-
-	      do
-		{
-		  /* The hash table never references local symbols so
-		     we can omit that test here.  */
-		  if ((symtab[symndx].st_shndx != SHN_UNDEF
-		       || symtab[symndx].st_value != 0)
-		      && ELFW(ST_TYPE) (symtab[symndx].st_info) != STT_TLS
-		      && DL_ADDR_SYM_MATCH (match, &symtab[symndx],
-					    matchsym, addr)
-		      && symtab[symndx].st_name < strtabsize)
-		    matchsym = (ElfW(Sym) *) &symtab[symndx];
-
-		  ++symndx;
-		}
-	      while ((*hasharr++ & 1u) == 0);
-	    }
+	  /* The hash table never references local symbols so
+	     we can omit that test here.  */
+	  if ((symtab[symndx].st_shndx != SHN_UNDEF
+	       || symtab[symndx].st_value != 0)
+	      && ELFW(ST_TYPE) (symtab[symndx].st_info) != STT_TLS
+	      && DL_ADDR_SYM_MATCH (match, &symtab[symndx],
+				    matchsym, addr)
+	      && symtab[symndx].st_name < strtabsize)
+	    matchsym = (ElfW(Sym) *) &symtab[symndx];
 	}
     }
   else
