@@ -129,6 +129,10 @@ ifloat: 1
 ildouble: 1
 ldouble: 1
 
+Function: "atan":
+double: 1
+idouble: 1
+
 Function: "atan2":
 float: 1
 ifloat: 1
@@ -406,9 +410,9 @@ ildouble: 2
 ldouble: 2
 
 Function: Real part of "casin_downward":
-double: 3
+double: 4
 float: 1
-idouble: 3
+idouble: 4
 ifloat: 1
 ildouble: 3
 ldouble: 3
@@ -422,9 +426,9 @@ ildouble: 5
 ldouble: 5
 
 Function: Real part of "casin_towardzero":
-double: 3
+double: 4
 float: 1
-idouble: 3
+idouble: 4
 ifloat: 1
 ildouble: 3
 ldouble: 3
@@ -478,9 +482,9 @@ ildouble: 5
 ldouble: 5
 
 Function: Imaginary part of "casinh_downward":
-double: 3
+double: 4
 float: 1
-idouble: 3
+idouble: 4
 ifloat: 1
 ildouble: 3
 ldouble: 3
@@ -494,9 +498,9 @@ ildouble: 5
 ldouble: 5
 
 Function: Imaginary part of "casinh_towardzero":
-double: 3
+double: 4
 float: 1
-idouble: 3
+idouble: 4
 ifloat: 1
 ildouble: 3
 ldouble: 3
@@ -870,7 +874,9 @@ ildouble: 4
 ldouble: 4
 
 Function: Imaginary part of "clog":
+double: 1
 float: 1
+idouble: 1
 ifloat: 1
 ildouble: 1
 ldouble: 1
@@ -1051,9 +1057,9 @@ ldouble: 3
 
 Function: Real part of "cpow":
 double: 2
-float: 4
+float: 5
 idouble: 2
-ifloat: 4
+ifloat: 5
 ildouble: 4
 ldouble: 4
 
@@ -1363,17 +1369,17 @@ ldouble: 5
 
 Function: Real part of "ctanh":
 double: 2
-float: 1
+float: 2
 idouble: 2
-ifloat: 1
+ifloat: 2
 ildouble: 3
 ldouble: 3
 
 Function: Imaginary part of "ctanh":
 double: 2
-float: 2
+float: 1
 idouble: 2
-ifloat: 2
+ifloat: 1
 ildouble: 3
 ldouble: 3
 
@@ -1940,6 +1946,12 @@ double: 1
 float: 3
 idouble: 1
 ifloat: 3
+ildouble: 1
+ldouble: 1
+
+Function: "pow_tonearest":
+float: 1
+ifloat: 1
 ildouble: 1
 ldouble: 1
 
