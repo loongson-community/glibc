@@ -51,9 +51,10 @@ __NTH (_test_and_set (int *__p, int __v))
      "beq	%0,%4,2f\n\t"
      "sc	%1,%2\n\t"
      "beqz	%1,1b\n"
-     "sync\n\t"
+     "nop\n\t"
      ".set	pop\n\t"
      "2:\n\t"
+     "sync\n\t"
      "/* End test and set */"
      : "=&r" (__r), "=&r" (__t), "=m" (*__p)
      : "m" (*__p), "r" (__v)
